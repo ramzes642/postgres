@@ -105,7 +105,7 @@ xml_is_well_formed(PG_FUNCTION_ARGS)
 
 	PG_TRY();
 	{
-		doctree = xmlParseMemory((char *) VARDATA_ANY(t), docsize);
+		doctree = xmlReadMemory((char *) VARDATA_ANY(t), docsize, NULL, NULL, XML_PARSE_HUGE);
 
 		result = (doctree != NULL);
 
@@ -425,8 +425,8 @@ pgxml_xpath(text *document, xmlChar *xpath, xpath_workspace *workspace)
 
 	PG_TRY();
 	{
-		workspace->doctree = xmlParseMemory((char *) VARDATA_ANY(document),
-											docsize);
+		workspace->doctree = xmlReadMemory((char *) VARDATA_ANY(document),
+											docsize, NULL, NULL, XML_PARSE_HUGE);
 		if (workspace->doctree != NULL)
 		{
 			workspace->ctxt = xmlXPathNewContext(workspace->doctree);
@@ -719,7 +719,7 @@ xpath_table(PG_FUNCTION_ARGS)
 
 			/* Parse the document */
 			if (xmldoc)
-				doctree = xmlParseMemory(xmldoc, strlen(xmldoc));
+				doctree = xmlReadMemory(xmldoc, strlen(xmldoc), NULL, NULL, XML_PARSE_HUGE);
 			else				/* treat NULL as not well-formed */
 				doctree = NULL;
 
