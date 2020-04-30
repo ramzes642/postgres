@@ -1598,6 +1598,7 @@ xml_parse(text *data, XmlOptionType xmloption_arg, bool preserve_whitespace,
 			Assert(doc->encoding == NULL);
 			doc->encoding = xmlStrdup((const xmlChar *) "UTF-8");
 			doc->standalone = standalone;
+			doc->parseFlags |= XML_PARSE_HUGE;
 
 			/* allow empty content */
 			if (*(utf8string + count))
