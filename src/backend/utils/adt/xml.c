@@ -1589,7 +1589,7 @@ xml_parse(text *data, XmlOptionType xmloption_arg, bool preserve_whitespace,
 								"invalid XML document");
 				else
 					xml_ereport(xmlerrcxt, ERROR, ERRCODE_INVALID_XML_CONTENT,
-								"invalid XML content");
+								"invalid XML content1");
 			}
 		}
 		else
@@ -1607,7 +1607,7 @@ xml_parse(text *data, XmlOptionType xmloption_arg, bool preserve_whitespace,
 													   utf8string + count, NULL);
 				if (res_code != 0 || xmlerrcxt->err_occurred)
 					xml_ereport(xmlerrcxt, ERROR, ERRCODE_INVALID_XML_CONTENT,
-								"invalid XML content");
+								"invalid XML content2");
 			}
 		}
 	}
